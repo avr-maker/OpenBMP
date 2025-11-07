@@ -49,6 +49,9 @@ bool ReadFile(const string& filename,BITMAP_FILEHEADER& fileheader,BITMAP_INFOHE
         cout<<"Only BMP file example \n";
         return false;
     }
+    if(bitCount!=24){
+        cout<<"only 24bit format \n";
+    }
     cout<<"completed \n";
     cout<<infoheader.width<<endl<<infoheader.height<<endl;
     return true;
