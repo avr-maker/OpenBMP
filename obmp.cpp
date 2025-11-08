@@ -42,6 +42,14 @@ void OpenBMP::invertImage(){
         pixel.blue=255-pixel.blue;
     }
 }
+void OpenBMP::negativeGrayImage(){
+    for(auto& pixel:pixels){
+        uint8_t transGray=AForRed*pixel.red+BForGreen*pixel.green+CForBlue*pixel.blue;
+        pixel.red=transGray;
+        pixel.green=transGray;
+        pixel.blue=transGray;
+    }
+}
 void OpenBMP::saveImage(const string& filename){
     std::ofstream out(filename,std::ios::binary);
     if(!out.is_open()){

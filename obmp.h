@@ -49,10 +49,15 @@ private:
 	BITMAP_FILEHEADER fileHeader;
 	BITMAP_INFOHEADER infoHeader;
     vector<BITMAP_COLORTABLE> pixels;
+    float AForRed=0.299;
+    float BForGreen=0.587;
+    float CForBlue=0.114;
+
 public:
 	OpenBMP(const std::string& filename);	
 	std::pair<int, int> shape();
     void invertImage();
+    void negativeGrayImage();
     void saveImage(const string& filename);
 };
 
