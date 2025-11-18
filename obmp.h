@@ -70,15 +70,21 @@ private:
 	BITMAP_FILEHEADER fileHeader;
 	BITMAP_INFOHEADER infoHeader;
     vector<BITMAP_COLORTABLE> pixels;
+
     float AForRed = 0.299;
     float BForGreen = 0.587;
     float CForBlue = 0.114;
+
+    const std::string ASCII=".:!@#$%^&*+";
+
     int clamp(const int& val, const int&  min, const int& max);
+
     int Kontrast_matrix[3][3]={
         {0,-1,0},
         {-1,5,-1},
         {0,-1,0}
     };
+
 	int map(int val, int from_min, int from_max, int to_min,  int to_max);
 
 public:
@@ -100,6 +106,10 @@ public:
 
 	// mirror method
 	void mirror(const std::string& method);
+
+	// void to_ascii(const int& ascii_width);
+	vector<vector<char>> to_ascii(const int& ascii_width);
+	void print_ascii(const int& width);
     
     void sepia(const std::string& method);
     void Redimg();

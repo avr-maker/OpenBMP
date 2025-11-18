@@ -92,24 +92,46 @@ OpenBMP::OpenBMP(const std::string& filename)
 		in.seekg(padding, ios::cur);
 	}
 }
-void OpenBMP::Image_to_ascii(int out_width=80){
-    int width=infoHeader.width;
-    int height=infoHeader.height;
-    int ascii_height=(out_width*height)/width/2;
-    const string ASCII=".:!@#$%^&*+";
-    for (int dy=0;dy<ascii_height;dy++){
-        for(int dx=0;dx<out_width;dx++){
-            int img_x=(dx*width)/out_width;
-            int img_y=height-1-(dy*height)/ascii_height;
-            int img_idx=img_y*width+img_x;
-            auto& pxl=pixels[img_idx];
-            int brightness=(pxl.red+pxl.green+pxl.blue)/3;
-            int char_index=map(brightness,0,255,0,ASCII.length()-1);
-            cout<<ASCII[char_index];
-        }
-        cout<<endl;
-    }
+
+vector<vector<char>> OpenBMP::to_ascii(const int& ascii_width) 
+{
+	vector<vector<char>> ascii_map;
+	auto [height, width] = shape();
+
+	int ascii_height = (ascii_width * height) / width / 2;
+
+    ascii_map.resize(ascii_height, vector<char>(ascii_width));
+
+	for (int dy = 0; dy < ascii_height; dy++)
+	{
+		for (int dx = 0; dx < ascii_width; dx++)
+		{
+			int img_x = (dx * width) / ascii_width;
+			int img_y = height - 1 - (dy * height) / ascii_height;
+			int img_idx = img_y * width + img_x;
+			auto& pxl = pixels[img_idx];
+            int brightness= (pxl.red + pxl.green + pxl.blue) / 3;
+            int char_index = map(brightness, 0, 255, 0, ASCII.length()-1 );
+            ascii_map[dy][dx] = ASCII[char_index];
+		}
+	}
+    
+	return ascii_map;
 }
+
+void OpenBMP::print_ascii(const int& ascii_width)
+{
+	vector<vector<char>> ascii_map = to_ascii(ascii_width);
+
+	for (size_t y = 0; y < ascii_map.size(); y++)
+	{
+		for (size_t x = 0; x < ascii_map[y].size(); x++)
+			std::cout << ascii_map[y][x];
+		std::cout << std::endl;
+	}
+	
+}
+
 void OpenBMP::sharpen(){
     OpenBMP temp =*this;
     int width=infoHeader.width;
