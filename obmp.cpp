@@ -348,3 +348,21 @@ void OpenBMP::bitwise_and(const OpenBMP& other)
 		pixels[i].blue &= pxls[i].blue;
 	}	
 }
+
+void bitwise_or(const OpenBMP& other)
+{
+	auto [height, width] = shape();
+	auto [other_height, other_weight] = other.shape();
+
+	if (height != other_height && width != other_weight)
+		throw ShapeError();
+
+	vector<BITMAP_COLORTABLE> pxls = other.get_pxl();
+
+	for (size_t i = 0; i < pxls.size(); i++)
+	{
+		pixels[i].red |= pxls[i].red;
+		pixels[i].blue |= pxls[i].green;
+		pixels[i].blue |= pxls[i].blue;
+	}	
+}
