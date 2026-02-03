@@ -65,3 +65,21 @@ obmp.mirror("vertical");
 ```cpp
 obmp.save("test.bmp");
 ```
+
+#### `get_pxl()`
+Получить массив пикселей изображения
+```cpp
+vector<BITMAP_COLORTABLE> pixels = obmp.get_pxl();
+```
+
+#### `to_ascii(const int& ascii_width)`
+Перевести изображение в ASCII формат
+```cpp
+vector<vector<char>> ascii_image = obmp.to_ascii(80);
+```
+
+#### `print_ascii(const int& width)`
+Отобразить изображение в ASCII формате
+```cpp
+obmp.print_ascii(80);
+```
