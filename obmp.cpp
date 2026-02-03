@@ -349,7 +349,7 @@ void OpenBMP::bitwise_and(const OpenBMP& other)
 	}	
 }
 
-void bitwise_or(const OpenBMP& other)
+void OpenBMP::bitwise_or(const OpenBMP& other)
 {
 	auto [height, width] = shape();
 	auto [other_height, other_weight] = other.shape();
