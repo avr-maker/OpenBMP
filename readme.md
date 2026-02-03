@@ -3,6 +3,8 @@
 
 OpenBMP is a library for working with Bitmaps, which allows you to manipulate bitmaps images.
 
+![main image](./assets/object.bmp)
+
 ### Get started
 ```cpp
 #include <iostream>

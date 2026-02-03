@@ -123,7 +123,6 @@ public:
     void sharpen();    
 	void save(const std::string& filename);
     void checkBits();
-    void Image_to_ascii(int out_width);
 };
 
 class OpenError {};
